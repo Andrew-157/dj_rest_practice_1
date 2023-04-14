@@ -3,7 +3,7 @@ from .models import Product
 
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    vendor = serializers.ReadOnlyField(source='vendor.username')
 
     class Meta:
         model = Product
