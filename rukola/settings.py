@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'djoser',
     'rest_framework',
-    'shop_api',
+    'stories',
 ]
 
 MIDDLEWARE = [
@@ -139,4 +139,11 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT', ),
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1)
+}
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'stories.serializers.UserCreateSerializer',
+        'current_user': 'stories.serializers.UserSerializer',
+    }
 }
