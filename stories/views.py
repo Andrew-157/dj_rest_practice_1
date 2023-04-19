@@ -8,7 +8,7 @@ from stories.permissions import IsWriterOrReadOnly
 
 
 class StoryViewSet(viewsets.ModelViewSet):
-    queryset = Story.objects.all()
+    queryset = Story.objects.select_related('writer').all()
     serializer_class = StorySerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly, IsWriterOrReadOnly
@@ -18,6 +18,6 @@ class StoryViewSet(viewsets.ModelViewSet):
         serializer.save(writer=self.request.user)
 
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+# class WriterViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
