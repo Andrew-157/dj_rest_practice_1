@@ -1,5 +1,5 @@
 """
-URL configuration for blog project.
+URL configuration for rukola project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -15,11 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from users import urls as users_urls
+from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("api/users/", include(users_urls))
 ]
