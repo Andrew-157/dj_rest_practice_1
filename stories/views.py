@@ -20,3 +20,21 @@ class StoryViewSet(viewsets.ModelViewSet):
 class WriterViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly, IsReviewerOrReadOnly
+    ]
+
+    def get_queryset(self):
+        return Review.objects.filter(story=self.kwargs['story_pk'])
+
+    def get_serializer_context(self):
+        return {
+            'request': self.request,
+            'reviewer_id': self.request.user.id,
+            'story_id': self.kwargs['story_pk']
+        }
