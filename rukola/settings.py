@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'djoser',
     'rest_framework',
+    'core',
     'stories',
 ]
 
@@ -143,7 +144,7 @@ SIMPLE_JWT = {
 
 DJOSER = {
     'SERIALIZERS': {
-        'user_create': 'stories.serializers.UserCreateSerializer',
-        'current_user': 'stories.serializers.UserSerializer',
+        'user_create': 'core.serializers.UserCreateSerializer',
+        'current_user': 'core.serializers.UserSerializer',
     }
 }

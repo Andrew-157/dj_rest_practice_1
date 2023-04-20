@@ -1,9 +1,7 @@
-from django.contrib.auth.models import User
-from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import permissions
 from stories.models import Story
-from stories.serializers import StorySerializer, UserSerializer
+from stories.serializers import StorySerializer
 from stories.permissions import IsWriterOrReadOnly
 
 
@@ -16,8 +14,3 @@ class StoryViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(writer=self.request.user)
-
-
-# class WriterViewSet(viewsets.ReadOnlyModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer

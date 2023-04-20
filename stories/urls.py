@@ -4,7 +4,7 @@ from stories import views
 
 
 router = DefaultRouter()
-router.register(r'stories', views.StoryViewSet, basename='story')
+router.register(r'', views.StoryViewSet, basename='story')
 
 
 urlpatterns = [
