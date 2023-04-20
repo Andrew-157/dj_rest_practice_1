@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework import permissions
-from stories.models import Story
-from stories.serializers import StorySerializer, UserSerializer
-from stories.permissions import IsWriterOrReadOnly
+from stories.models import Story, Review
+from stories.serializers import StorySerializer, UserSerializer, ReviewSerializer
+from stories.permissions import IsWriterOrReadOnly, IsReviewerOrReadOnly
 
 
 class StoryViewSet(viewsets.ModelViewSet):
