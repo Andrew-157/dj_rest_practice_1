@@ -13,3 +13,19 @@ class Story(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+class Review(models.Model):
+    rating_choices = [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5),
+                      (6, 6), (7, 7), (8, 8), (9, 9), (10, 10)]
+    content = models.TextField()
+    reviewer = models.ForeignKey(
+        'auth.User', related_name='reviews', on_delete=models.CASCADE
+    )
+    story = models.ForeignKey(
+        'stories.Story', related_name='reviews', on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField(choices=rating_choices)
+    pub_date = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.content
