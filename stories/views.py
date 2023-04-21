@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
+from django.db.models import Avg
+from rest_framework.decorators import action
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.response import Response
 from stories.models import Story, Review
 from stories.serializers import StorySerializer, UserSerializer, ReviewSerializer
 from stories.permissions import IsWriterOrReadOnly, IsReviewerOrReadOnly
@@ -15,6 +18,13 @@ class StoryViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(writer=self.request.user)
+
+    @action(detail=True, methods=['GET', 'HEAD', 'OPTIONS'])
+    def rating(self, request, *args, **kwargs):
+        story = self.get_object()
+        story_rating = Review.objects.filter(
+            story=story).aggregate(Avg('rating'))
+        return Response(story_rating)
 
 
 class WriterViewSet(viewsets.ReadOnlyModelViewSet):

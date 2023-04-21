@@ -60,9 +60,12 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
             'story_pk': 'story__pk'
         }
     )
+    rating = serializers.HyperlinkedIdentityField(
+        view_name='story-rating', read_only=True
+    )
 
     class Meta:
         model = Story
         fields = [
-            'url', 'id', 'title', 'content', 'writer', 'pub_date',  'reviews'
+            'url', 'id', 'title', 'content', 'writer', 'pub_date', 'reviews', 'rating'
         ]
