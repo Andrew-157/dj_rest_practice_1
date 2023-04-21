@@ -11,7 +11,7 @@ router.register(r'writers', views.WriterViewSet, basename='writer')
 stories_router = routers.NestedDefaultRouter(
     router, r'stories', lookup='story')
 stories_router.register(r'reviews', views.ReviewViewSet,
-                        basename='story-reviews')
+                        basename='story-review')
 
 
 urlpatterns = router.urls + stories_router.urls

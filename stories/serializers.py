@@ -30,7 +30,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = [
-            'id', 'content', 'rating', 'pub_date', 'story'
+            'id', 'content', 'rating', 'pub_date',
         ]
 
     def create(self, validated_data):
@@ -45,8 +45,17 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
     writer = serializers.HyperlinkedRelatedField(
         view_name='writer-detail', read_only=True)
 
+    reviews = NestedHyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name='story-review-detail',
+        parent_lookup_kwargs={
+            'story_pk': 'story__pk'
+        }
+    )
+
     class Meta:
         model = Story
         fields = [
-            'url', 'id', 'title', 'content', 'writer', 'pub_date',
+            'url', 'id', 'title', 'content', 'writer', 'pub_date',  'reviews'
         ]
