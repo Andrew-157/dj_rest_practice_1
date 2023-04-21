@@ -30,20 +30,20 @@ class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     story = serializers.HyperlinkedRelatedField(
         view_name='story-detail', read_only=True
     )
-    reviewer = serializers.HyperlinkedRelatedField(
+    writer = serializers.HyperlinkedRelatedField(
         view_name='writer-detail', read_only=True
     )
 
     class Meta:
         model = Review
         fields = [
-            'id', 'content', 'rating', 'pub_date', 'story', 'reviewer'
+            'id', 'content', 'rating', 'pub_date', 'story', 'writer'
         ]
 
     def create(self, validated_data):
-        reviewer_id = self.context['reviewer_id']
+        writer_id = self.context['writer_id']
         story_id = self.context['story_id']
-        return Review.objects.create(reviewer_id=reviewer_id,
+        return Review.objects.create(writer_id=writer_id,
                                      story_id=story_id,
                                      **validated_data)
 

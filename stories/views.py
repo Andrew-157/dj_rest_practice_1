@@ -35,6 +35,6 @@ class ReviewViewSet(viewsets.ModelViewSet):
     def get_serializer_context(self):
         return {
             'request': self.request,
-            'reviewer_id': self.request.user.id,
+            'writer_id': self.request.user.id,
             'story_id': self.kwargs['story_pk']
         }

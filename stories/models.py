@@ -19,7 +19,7 @@ class Review(models.Model):
     rating_choices = [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5),
                       (6, 6), (7, 7), (8, 8), (9, 9), (10, 10)]
     content = models.TextField()
-    reviewer = models.ForeignKey(
+    writer = models.ForeignKey(
         'auth.User', related_name='reviews', on_delete=models.CASCADE
     )
     story = models.ForeignKey(
