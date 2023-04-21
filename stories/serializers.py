@@ -25,12 +25,19 @@ class UserSerializer(BaseUserSerializer):
         ]
 
 
-class ReviewSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.HyperlinkedModelSerializer):
+
+    story = serializers.HyperlinkedRelatedField(
+        view_name='story-detail', read_only=True
+    )
+    reviewer = serializers.HyperlinkedRelatedField(
+        view_name='writer-detail', read_only=True
+    )
 
     class Meta:
         model = Review
         fields = [
-            'id', 'content', 'rating', 'pub_date',
+            'id', 'content', 'rating', 'pub_date', 'story', 'reviewer'
         ]
 
     def create(self, validated_data):
